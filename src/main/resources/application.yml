@@ -1,0 +1,37 @@
+broker:
+  https:
+    url: failover:(https://localhost:61616)?maxReconnectAttempts=2
+    #url: failover:(https://localhost/activemq)?maxReconnectAttempts=2
+  username: admin
+  password: admin
+
+client:
+  keystore:
+    path: C:/Activemq/client.jks
+    type: jks
+    password: changeit
+
+---
+spring:
+  config:
+    activate:
+      on-profile: server1
+server:
+  port: 9998
+
+atomikos:
+  properties:
+    log-base-name: server1
+
+---
+spring:
+  config:
+    activate:
+      on-profile: server2
+
+server:
+  port: 9999
+
+atomikos:
+  properties:
+    log-base-name: server2
